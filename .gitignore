@@ -78,6 +78,9 @@ web_modules/
 .next
 out
 
+# Waitlist signups (local dev)
+data/waitlist.json
+
 # Nuxt.js build / generate output
 .nuxt
 dist

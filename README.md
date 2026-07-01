@@ -1,16 +1,23 @@
-## Hi there 👋
+# PlainCost Insights
 
-<!--
-**plaincost/plaincost** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+A simple self-serve SaaS tool that automatically generates plain-English AWS cost optimization reports and basic recommendations for non-technical SMBs.
 
-Here are some ideas to get you started:
+## Getting started
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view the landing page.
+
+## Scripts
+
+- `npm run dev` — Start development server
+- `npm run build` — Production build
+- `npm run start` — Start production server
+- `npm run lint` — Run ESLint
+
+## Waitlist
+
+Email signups from the landing page are stored in `data/waitlist.json` (gitignored).
