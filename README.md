@@ -26,8 +26,8 @@ Email signups are stored in Supabase (`waitlist_signups` table).
 
 1. Create a free project at [supabase.com](https://supabase.com).
 2. In the Supabase dashboard, open **SQL Editor** and run `supabase/waitlist.sql`.
-3. Copy credentials from **Settings → API**:
+3. Copy credentials from **Settings → API Keys**:
    - **Project URL** → `SUPABASE_URL`
-   - **anon public** key → `SUPABASE_ANON_KEY`
+   - **Publishable key** (`sb_publishable_...`) → `SUPABASE_PUBLISHABLE_KEY`
 4. Add both to `.env.local` for local dev (see `.env.example`).
 5. Add the same variables in Vercel: **Project → Settings → Environment Variables**, then redeploy.
