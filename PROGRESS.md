@@ -3,15 +3,15 @@
 Living tracker for project status, planned work, and session notes.
 Ask to update the **Session log** at the end of each working session.
 
-**Last updated:** 2026-07-03
+**Last updated:** 2026-07-04
 
 ---
 
 ## Current focus
 
-**Phase 1 — Launch the landing page** (in progress)
+**Phase 1 — Launch the landing page** (nearly complete)
 
-Goal: Get the marketing site live on Vercel, capture waitlist signups reliably, and point a custom domain at it.
+Site is live at **https://plaincost.ai** with working waitlist signups. Remaining Phase 1 items are optional polish (favicon/OG meta, analytics) before promoting the URL widely.
 
 ---
 
@@ -25,22 +25,22 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 |---|------|--------|-------|
 | 1.1 | Landing page (hero, sections, FAQ, CTA) | ✅ Done | Shipped in initial commit |
 | 1.2 | Privacy policy page | ✅ Done | `/privacy` |
-| 1.3 | Waitlist form + API (local dev) | ✅ Done | Writes to `data/waitlist.json` |
+| 1.3 | Waitlist form + API | ✅ Done | Supabase `waitlist_signups` table in production |
 | 1.4 | Push repo to GitHub (`plaincost/plaincost`) | ✅ Done | `main` branch |
 | 1.5 | Create Vercel account (GitHub org) | ✅ Done | Signed up 2026-07-03 |
-| 1.6 | Import repo in Vercel & first deploy | ⬜ Pending | Grant Vercel access to `plaincost` org if repo not visible |
-| 1.7 | Smoke-test live site | ⬜ Pending | Homepage, privacy page, mobile layout |
-| 1.8 | Fix waitlist persistence for production | ⬜ Pending | File writes don't persist on Vercel serverless; swap to Resend, ConvertKit, Supabase, etc. |
-| 1.9 | Add custom domain | ⬜ Pending | DNS → Vercel; decide on domain (e.g. `plaincost.com`) |
-| 1.10 | Favicon & social preview (OG/Twitter meta) | ⬜ Pending | Improves link shares |
+| 1.6 | Import repo in Vercel & first deploy | ✅ Done | Live at `plaincost.vercel.app` |
+| 1.7 | Smoke-test live site | ✅ Done | Homepage, privacy, waitlist API verified |
+| 1.8 | Fix waitlist persistence for production | ✅ Done | Supabase + publishable key; RLS insert-only |
+| 1.9 | Add custom domain | ✅ Done | `plaincost.ai` via Cloudflare; apex is primary |
+| 1.10 | Favicon & social preview (OG/Twitter meta) | ⬜ Pending | Use `https://plaincost.ai` as canonical base |
 | 1.11 | Basic analytics | ⬜ Pending | Plausible, Vercel Analytics, or similar |
 
 ### Phase 2 — Waitlist operations
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| 2.1 | Waitlist confirmation email | ⬜ Pending | Depends on 1.8 provider choice |
-| 2.2 | Export / admin view for signups | ⬜ Pending | Dashboard or provider UI |
+| 2.1 | Waitlist confirmation email | ⬜ Pending | Resend or Kit when ready |
+| 2.2 | Export / admin view for signups | ⬜ Pending | Supabase Table Editor works for now |
 | 2.3 | Welcome email sequence (optional) | ⬜ Pending | Nurture before product launch |
 
 ### Phase 3 — AWS connection & data pipeline
@@ -51,7 +51,7 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 | 3.2 | Cross-account role assumption (STS) | ⬜ Pending | Secure connection without storing long-lived creds |
 | 3.3 | Cost Explorer API integration | ⬜ Pending | Weekly spend, service breakdown, MoM deltas |
 | 3.4 | Compute Optimizer integration | ⬜ Pending | Rightsizing / savings recommendations |
-| 3.5 | Data models & storage for customer accounts | ⬜ Pending | DB choice TBD (Supabase, Postgres, etc.) |
+| 3.5 | Data models & storage for customer accounts | ⬜ Pending | Extend existing Supabase project |
 | 3.6 | Report generation engine | ⬜ Pending | Transform raw AWS data → structured report |
 | 3.7 | Plain-English narrative layer | ⬜ Pending | Template-based or LLM-assisted summaries |
 
@@ -94,17 +94,38 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 | Date | Decision | Rationale |
 |------|----------|-----------|
 | 2026-07-03 | Host on Vercel | Native Next.js support, GitHub deploys, free tier for landing page |
-| — | Waitlist storage provider | **TBD** — needed before promoting signups in production |
-| — | Custom domain | **TBD** |
-| — | Database | **TBD** — needed at Phase 3 |
+| 2026-07-04 | Waitlist storage: Supabase | Free tier, same DB for future product data, RLS insert-only policy |
+| 2026-07-04 | Custom domain: `plaincost.ai` | Registered on Cloudflare; CNAME to `fa53a9371db04fc3.vercel-dns-017.com` |
+| 2026-07-04 | Primary URL: `plaincost.ai` | Apex domain; `www` → 308 redirect to apex |
+| 2026-07-04 | Database: Supabase | Waitlist table live; extend for customer data in Phase 3 |
 | — | Auth provider | **TBD** — needed at Phase 4 |
-| — | Email provider | **TBD** — needed at Phase 2+ |
+| — | Email provider | **TBD** — Resend likely for reports + waitlist emails (Phase 2+) |
+
+---
+
+## Live URLs
+
+| URL | Purpose |
+|-----|---------|
+| https://plaincost.ai | **Primary** — production site |
+| https://www.plaincost.ai | Redirects to apex |
+| https://plaincost.vercel.app | Vercel default (still works) |
 
 ---
 
 ## Session log
 
 Reverse-chronological notes. Add an entry at the end of each session.
+
+### 2026-07-04
+
+- Deployed to Vercel (`plaincost.vercel.app`); smoke-tested homepage and privacy page.
+- Migrated waitlist from local JSON to Supabase (`waitlist_signups` table, publishable key, insert-only RLS).
+- Added `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` to Vercel; verified live signups.
+- Configured custom domain `plaincost.ai` on Cloudflare (CNAME `@` and `www` → Vercel DNS).
+- Flipped primary URL from `www` to apex (`plaincost.ai`); `www` redirects via 308.
+- Added `PROGRESS.md` tracker; committed Supabase waitlist implementation.
+- **Next session:** Favicon/OG meta (1.10), analytics (1.11), or begin Phase 2/3.
 
 ### 2026-07-03
 
@@ -124,4 +145,8 @@ npm run build    # production build (verified passing)
 npm run lint
 ```
 
-Waitlist signups (local only): `data/waitlist.json` (gitignored)
+**Env vars (local `.env.local` + Vercel):** `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`
+
+**Waitlist signups:** Supabase → Table Editor → `waitlist_signups`
+
+**DNS (Cloudflare):** CNAME `@` and `www` → `fa53a9371db04fc3.vercel-dns-017.com` (DNS only / grey cloud)
