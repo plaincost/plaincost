@@ -1,27 +1,5 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { NextRequest, NextResponse } from "next/server";
-
-const WAITLIST_PATH = path.join(process.cwd(), "data", "waitlist.json");
-
-type WaitlistEntry = {
-  email: string;
-  createdAt: string;
-};
-
-async function readWaitlist(): Promise<WaitlistEntry[]> {
-  try {
-    const raw = await fs.readFile(WAITLIST_PATH, "utf-8");
-    return JSON.parse(raw) as WaitlistEntry[];
-  } catch {
-    return [];
-  }
-}
-
-async function writeWaitlist(entries: WaitlistEntry[]): Promise<void> {
-  await fs.mkdir(path.dirname(WAITLIST_PATH), { recursive: true });
-  await fs.writeFile(WAITLIST_PATH, JSON.stringify(entries, null, 2));
-}
+import { getSupabaseServerClient } from "@/lib/supabase";
 
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -45,17 +23,34 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const waitlist = await readWaitlist();
+  let supabase;
 
-  if (waitlist.some((entry) => entry.email === email)) {
+  try {
+    supabase = getSupabaseServerClient();
+  } catch {
+    console.error("Waitlist API: Supabase is not configured.");
     return NextResponse.json(
-      { error: "This email is already on the waitlist." },
-      { status: 409 },
+      { error: "Waitlist is temporarily unavailable. Please try again later." },
+      { status: 503 },
     );
   }
 
-  waitlist.push({ email, createdAt: new Date().toISOString() });
-  await writeWaitlist(waitlist);
+  const { error } = await supabase.from("waitlist_signups").insert({ email });
+
+  if (error) {
+    if (error.code === "23505") {
+      return NextResponse.json(
+        { error: "This email is already on the waitlist." },
+        { status: 409 },
+      );
+    }
+
+    console.error("Waitlist insert failed:", error.message);
+    return NextResponse.json(
+      { error: "Something went wrong. Please try again." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ success: true });
 }

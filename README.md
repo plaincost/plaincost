@@ -20,4 +20,14 @@ Open [http://localhost:3000](http://localhost:3000) to view the landing page.
 
 ## Waitlist
 
-Email signups from the landing page are stored in `data/waitlist.json` (gitignored).
+Email signups are stored in Supabase (`waitlist_signups` table).
+
+### Setup
+
+1. Create a free project at [supabase.com](https://supabase.com).
+2. In the Supabase dashboard, open **SQL Editor** and run `supabase/waitlist.sql`.
+3. Copy credentials from **Settings → API**:
+   - **Project URL** → `SUPABASE_URL`
+   - **anon public** key → `SUPABASE_ANON_KEY`
+4. Add both to `.env.local` for local dev (see `.env.example`).
+5. Add the same variables in Vercel: **Project → Settings → Environment Variables**, then redeploy.
