@@ -28,10 +28,13 @@ export function waitlistConfirmationHtml(): string {
                   You're on the waitlist
                 </h1>
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#475569;">
-                  Thanks for joining. We'll email you when early access opens and share your free sample report.
+                  Thanks for joining. We'll email you when your early-access spot opens.
                 </p>
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#475569;">
-                  PlainCost sends plain-English weekly AWS cost reports — what you spent, what changed, and where you can save.
+                  When invited, you'll connect your AWS account with read-only access — a quick, guided setup — and receive your first plain-English cost report based on your actual billing data.
+                </p>
+                <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#475569;">
+                  After that, PlainCost sends weekly reports showing what you spent, what changed, and where you can save.
                 </p>
                 <p style="margin:0;font-size:14px;line-height:1.6;color:#64748b;">
                   No spam. Unsubscribe anytime by replying to this email.
@@ -58,9 +61,11 @@ export function waitlistConfirmationText(): string {
   return [
     "You're on the PlainCost waitlist.",
     "",
-    "Thanks for joining. We'll email you when early access opens and share your free sample report.",
+    "Thanks for joining. We'll email you when your early-access spot opens.",
     "",
-    "PlainCost sends plain-English weekly AWS cost reports — what you spent, what changed, and where you can save.",
+    "When invited, you'll connect your AWS account with read-only access — a quick, guided setup — and receive your first plain-English cost report based on your actual billing data.",
+    "",
+    "After that, PlainCost sends weekly reports showing what you spent, what changed, and where you can save.",
     "",
     "No spam. Unsubscribe anytime by replying to this email.",
     "",
