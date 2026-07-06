@@ -31,10 +31,10 @@ export function waitlistConfirmationHtml(): string {
                   Thanks for joining. We'll email you when your early-access spot opens.
                 </p>
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#475569;">
-                  When invited, you'll connect your AWS account with read-only access — a quick, guided setup — and receive your first plain-English cost report based on your actual billing data.
+                  When invited, you'll connect your AWS account with read-only access — a quick, guided setup, about five minutes — and receive a free sample report based on your actual billing data.
                 </p>
                 <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#475569;">
-                  After that, PlainCost sends weekly reports showing what you spent, what changed, and where you can save.
+                  Ongoing weekly reports will be a paid subscription. As a waitlist member, you'll get early access and founding-member pricing when we open subscriptions — we'll share details before anything is charged.
                 </p>
                 <p style="margin:0;font-size:14px;line-height:1.6;color:#64748b;">
                   No spam. Unsubscribe anytime by replying to this email.
@@ -63,9 +63,9 @@ export function waitlistConfirmationText(): string {
     "",
     "Thanks for joining. We'll email you when your early-access spot opens.",
     "",
-    "When invited, you'll connect your AWS account with read-only access — a quick, guided setup — and receive your first plain-English cost report based on your actual billing data.",
+    "When invited, you'll connect your AWS account with read-only access — a quick, guided setup, about five minutes — and receive a free sample report based on your actual billing data.",
     "",
-    "After that, PlainCost sends weekly reports showing what you spent, what changed, and where you can save.",
+    "Ongoing weekly reports will be a paid subscription. As a waitlist member, you'll get early access and founding-member pricing when we open subscriptions — we'll share details before anything is charged.",
     "",
     "No spam. Unsubscribe anytime by replying to this email.",
     "",
