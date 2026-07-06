@@ -1,5 +1,6 @@
 import { track } from "@vercel/analytics/server";
 import { NextRequest, NextResponse } from "next/server";
+import { sendWaitlistConfirmationEmail } from "@/lib/resend";
 import { getSupabaseServerClient } from "@/lib/supabase";
 
 function isValidEmail(email: string): boolean {
@@ -54,6 +55,14 @@ export async function POST(request: NextRequest) {
   }
 
   await track("Waitlist Signup");
+
+  const emailResult = await sendWaitlistConfirmationEmail(email);
+
+  if (!emailResult.sent) {
+    console.warn(
+      `Waitlist signup saved for ${email}, but confirmation email was not sent.`,
+    );
+  }
 
   return NextResponse.json({ success: true });
 }
