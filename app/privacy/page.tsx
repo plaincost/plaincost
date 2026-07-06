@@ -2,8 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — PlainCost Insights",
+  title: "Privacy Policy",
   description: "How PlainCost Insights handles your data.",
+  openGraph: {
+    title: "Privacy Policy — PlainCost Insights",
+    description: "How PlainCost Insights handles your data.",
+    url: "/privacy",
+  },
+  twitter: {
+    title: "Privacy Policy — PlainCost Insights",
+    description: "How PlainCost Insights handles your data.",
+  },
 };
 
 export default function PrivacyPage() {

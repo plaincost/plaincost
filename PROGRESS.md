@@ -3,7 +3,7 @@
 Living tracker for project status, planned work, and session notes.
 Ask to update the **Session log** at the end of each working session.
 
-**Last updated:** 2026-07-04
+**Last updated:** 2026-07-05
 
 ---
 
@@ -11,7 +11,7 @@ Ask to update the **Session log** at the end of each working session.
 
 **Phase 1 — Launch the landing page** (nearly complete)
 
-Site is live at **https://plaincost.ai** with working waitlist signups. Remaining Phase 1 items are optional polish (favicon/OG meta, analytics) before promoting the URL widely.
+Site is live at **https://plaincost.ai** with working waitlist signups. Remaining Phase 1 item is optional analytics (1.11) before promoting the URL widely.
 
 ---
 
@@ -32,7 +32,7 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 | 1.7 | Smoke-test live site | ✅ Done | Homepage, privacy, waitlist API verified |
 | 1.8 | Fix waitlist persistence for production | ✅ Done | Supabase + publishable key; RLS insert-only |
 | 1.9 | Add custom domain | ✅ Done | `plaincost.ai` via Cloudflare; apex is primary |
-| 1.10 | Favicon & social preview (OG/Twitter meta) | ⬜ Pending | Use `https://plaincost.ai` as canonical base |
+| 1.10 | Favicon & social preview (OG/Twitter meta) | ✅ Done | Dynamic `icon`, `apple-icon`, `opengraph-image`; `metadataBase` set |
 | 1.11 | Basic analytics | ⬜ Pending | Plausible, Vercel Analytics, or similar |
 
 ### Phase 2 — Waitlist operations
@@ -116,6 +116,12 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 ## Session log
 
 Reverse-chronological notes. Add an entry at the end of each session.
+
+### 2026-07-05
+
+- Added favicon (`app/icon.tsx`), Apple touch icon, and OG image (`app/opengraph-image.tsx`).
+- Expanded root metadata: `metadataBase`, Open Graph, and Twitter card tags.
+- **Next session:** Analytics (1.11) or Phase 2/3.
 
 ### 2026-07-04
 
