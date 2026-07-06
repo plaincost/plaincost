@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics/server";
 import { NextRequest, NextResponse } from "next/server";
 import { getSupabaseServerClient } from "@/lib/supabase";
 
@@ -51,6 +52,8 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
+
+  await track("Waitlist Signup");
 
   return NextResponse.json({ success: true });
 }

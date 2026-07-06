@@ -3,15 +3,15 @@
 Living tracker for project status, planned work, and session notes.
 Ask to update the **Session log** at the end of each working session.
 
-**Last updated:** 2026-07-05
+**Last updated:** 2026-07-06
 
 ---
 
 ## Current focus
 
-**Phase 1 — Launch the landing page** (nearly complete)
+**Phase 1 — Launch the landing page** (complete)
 
-Site is live at **https://plaincost.ai** with working waitlist signups. Remaining Phase 1 item is optional analytics (1.11) before promoting the URL widely.
+Site is live at **https://plaincost.ai** with working waitlist signups and analytics. Ready to promote the URL.
 
 ---
 
@@ -33,7 +33,7 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 | 1.8 | Fix waitlist persistence for production | ✅ Done | Supabase + publishable key; RLS insert-only |
 | 1.9 | Add custom domain | ✅ Done | `plaincost.ai` via Cloudflare; apex is primary |
 | 1.10 | Favicon & social preview (OG/Twitter meta) | ✅ Done | Dynamic `icon`, `apple-icon`, `opengraph-image`; `metadataBase` set |
-| 1.11 | Basic analytics | ⬜ Pending | Plausible, Vercel Analytics, or similar |
+| 1.11 | Basic analytics | ✅ Done | Vercel Web Analytics + waitlist signup event |
 
 ### Phase 2 — Waitlist operations
 
@@ -116,6 +116,12 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 ## Session log
 
 Reverse-chronological notes. Add an entry at the end of each session.
+
+### 2026-07-06
+
+- Added Vercel Web Analytics (`@vercel/analytics`) for pageview tracking.
+- Track `Waitlist Signup` custom event on successful API insert.
+- **Next session:** Phase 2 (waitlist emails) or Phase 3 (AWS pipeline).
 
 ### 2026-07-05
 
