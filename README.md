@@ -44,3 +44,10 @@ Email signups are stored in Supabase (`waitlist_signups` table).
 6. Redeploy.
 
 Signups still save if email is not configured; confirmation email is sent when Resend env vars are set.
+
+### Waitlist admin
+
+1. In Supabase **Settings → API Keys**, copy the **service_role** key (keep secret).
+2. Choose a strong `WAITLIST_ADMIN_SECRET` password.
+3. Add both to Vercel (mark `SUPABASE_SERVICE_ROLE_KEY` and `WAITLIST_ADMIN_SECRET` as **Sensitive**).
+4. Open `https://plaincost.ai/admin`, sign in, and use **Export CSV** as needed.

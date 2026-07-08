@@ -3,15 +3,15 @@
 Living tracker for project status, planned work, and session notes.
 Ask to update the **Session log** at the end of each working session.
 
-**Last updated:** 2026-07-06
+**Last updated:** 2026-07-07
 
 ---
 
 ## Current focus
 
-**Phase 1 — Launch the landing page** (complete)
+**Phase 2 — Waitlist operations** (complete)
 
-Site is live at **https://plaincost.ai** with working waitlist signups and analytics. Ready to promote the URL.
+Waitlist emails and admin tooling are live. Next up: **Phase 3 — AWS connection & data pipeline**.
 
 ---
 
@@ -39,9 +39,9 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| 2.1 | Waitlist confirmation email | ⬜ Pending | Resend or Kit when ready |
-| 2.2 | Export / admin view for signups | ⬜ Pending | Supabase Table Editor works for now |
-| 2.3 | Welcome email sequence (optional) | ⬜ Pending | Nurture before product launch |
+| 2.1 | Waitlist confirmation email | ✅ Done | Resend + `plaincost.ai` domain verified |
+| 2.2 | Export / admin view for signups | ✅ Done | `/admin` login, table view, CSV export |
+| 2.3 | Welcome email sequence (optional) | ⏸ Deferred | Not needed for MVP; add before broader marketing |
 
 ### Phase 3 — AWS connection & data pipeline
 
@@ -116,6 +116,13 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 ## Session log
 
 Reverse-chronological notes. Add an entry at the end of each session.
+
+### 2026-07-07
+
+- Tightened Phase 2: password-protected admin at `/admin` with signup table, stats, and CSV export.
+- Requires `WAITLIST_ADMIN_SECRET` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
+- Deferred optional welcome email sequence (2.3).
+- **Next session:** Phase 3 — IAM setup guide and AWS data pipeline.
 
 ### 2026-07-06
 
