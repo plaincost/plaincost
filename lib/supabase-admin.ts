@@ -13,15 +13,16 @@ export function getSupabaseAdminClient(): SupabaseClient {
   }
 
   const url = process.env.SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const secretKey =
+    process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!url || !serviceRoleKey) {
+  if (!url || !secretKey) {
     throw new Error(
-      "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variables.",
+      "Missing SUPABASE_URL or SUPABASE_SECRET_KEY environment variables.",
     );
   }
 
-  supabaseAdmin = createClient(url, serviceRoleKey);
+  supabaseAdmin = createClient(url, secretKey);
   return supabaseAdmin;
 }
 

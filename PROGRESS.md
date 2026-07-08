@@ -120,7 +120,7 @@ Reverse-chronological notes. Add an entry at the end of each session.
 ### 2026-07-07
 
 - Tightened Phase 2: password-protected admin at `/admin` with signup table, stats, and CSV export.
-- Requires `WAITLIST_ADMIN_SECRET` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel.
+- Requires `WAITLIST_ADMIN_SECRET` and `SUPABASE_SECRET_KEY` in Vercel.
 - Deferred optional welcome email sequence (2.3).
 - **Next session:** Phase 3 — IAM setup guide and AWS data pipeline.
 

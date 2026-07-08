@@ -47,7 +47,7 @@ Signups still save if email is not configured; confirmation email is sent when R
 
 ### Waitlist admin
 
-1. In Supabase **Settings → API Keys**, copy the **service_role** key (keep secret).
+1. In Supabase **Settings → API Keys**, copy the **secret** key (`sb_secret_...`). Use this instead of the legacy `service_role` key.
 2. Choose a strong `WAITLIST_ADMIN_SECRET` password.
-3. Add both to Vercel (mark `SUPABASE_SERVICE_ROLE_KEY` and `WAITLIST_ADMIN_SECRET` as **Sensitive**).
+3. Add both to Vercel (mark `SUPABASE_SECRET_KEY` and `WAITLIST_ADMIN_SECRET` as **Sensitive**).
 4. Open `https://plaincost.ai/admin`, sign in, and use **Export CSV** as needed.
