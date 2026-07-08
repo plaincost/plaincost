@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: PlainCost Insights read-only IAM role for AWS cost analysis.
+
+Parameters:
+  ExternalId:
+    Type: String
+    Description: External ID provided by PlainCost. Required for secure cross-account access.
+    MinLength: 8
+    NoEcho: true
+  PlainCostAwsAccountId:
+    Type: String
+    Description: PlainCost AWS account ID that may assume this role.
+    AllowedPattern: "[0-9]{12}"
+
+Resources:
+  PlainCostReadOnlyRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: PlainCostReadOnly
+      Description: Read-only access for PlainCost Insights AWS cost reports.
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              AWS: !Sub "arn:aws:iam::${PlainCostAwsAccountId}:root"
+            Action: sts:AssumeRole
+            Condition:
+              StringEquals:
+                sts:ExternalId: !Ref ExternalId
+      Policies:
+        - PolicyName: PlainCostReadOnlyPolicy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: CostExplorerReadOnly
+                Effect: Allow
+                Action:
+                  - ce:GetCostAndUsage
+                  - ce:GetCostForecast
+                  - ce:GetDimensionValues
+                  - ce:GetTags
+                  - ce:GetReservationUtilization
+                  - ce:GetReservationCoverage
+                  - ce:GetSavingsPlansUtilization
+                  - ce:GetSavingsPlansCoverage
+                  - ce:GetRightsizingRecommendation
+                  - aws-portal:ViewBilling
+                Resource: "*"
+              - Sid: ComputeOptimizerReadOnly
+                Effect: Allow
+                Action:
+                  - compute-optimizer:GetEnrollmentStatus
+                  - compute-optimizer:GetRecommendationSummaries
+                  - compute-optimizer:GetEC2InstanceRecommendations
+                  - compute-optimizer:GetAutoScalingGroupRecommendations
+                  - compute-optimizer:GetEBSVolumeRecommendations
+                  - compute-optimizer:GetLambdaFunctionRecommendations
+                Resource: "*"
+
+Outputs:
+  RoleArn:
+    Description: Paste this Role ARN into PlainCost after the stack completes.
+    Value: !GetAtt PlainCostReadOnlyRole.Arn
+  AwsAccountId:
+    Description: Your AWS account ID.
+    Value: !Ref AWS::AccountId

@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_COOKIE_NAME, getAdminSessionToken } from "@/lib/admin-auth";
 
-const protectedPrefixes = ["/admin/waitlist", "/api/admin/waitlist"];
+const protectedPrefixes = [
+  "/admin/waitlist",
+  "/admin/aws",
+  "/api/admin/waitlist",
+  "/api/admin/aws",
+];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -42,5 +47,10 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/waitlist/:path*", "/api/admin/waitlist/:path*"],
+  matcher: [
+    "/admin/waitlist/:path*",
+    "/admin/aws/:path*",
+    "/api/admin/waitlist/:path*",
+    "/api/admin/aws/:path*",
+  ],
 };

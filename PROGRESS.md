@@ -3,15 +3,15 @@
 Living tracker for project status, planned work, and session notes.
 Ask to update the **Session log** at the end of each working session.
 
-**Last updated:** 2026-07-07
+**Last updated:** 2026-07-08
 
 ---
 
 ## Current focus
 
-**Phase 2 — Waitlist operations** (complete)
+**Phase 3 — AWS connection & data pipeline** (in progress)
 
-Waitlist emails and admin tooling are live. Next up: **Phase 3 — AWS connection & data pipeline**.
+Core AWS pipeline, CloudFormation template, and admin tooling are implemented. Customer self-serve onboarding remains Phase 4.
 
 ---
 
@@ -47,13 +47,13 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 
 | # | Task | Status | Notes |
 |---|------|--------|-------|
-| 3.1 | IAM role CloudFormation / setup guide | ⬜ Pending | Read-only billing + Cost Explorer permissions |
-| 3.2 | Cross-account role assumption (STS) | ⬜ Pending | Secure connection without storing long-lived creds |
-| 3.3 | Cost Explorer API integration | ⬜ Pending | Weekly spend, service breakdown, MoM deltas |
-| 3.4 | Compute Optimizer integration | ⬜ Pending | Rightsizing / savings recommendations |
-| 3.5 | Data models & storage for customer accounts | ⬜ Pending | Extend existing Supabase project |
-| 3.6 | Report generation engine | ⬜ Pending | Transform raw AWS data → structured report |
-| 3.7 | Plain-English narrative layer | ⬜ Pending | Template-based or LLM-assisted summaries |
+| 3.1 | IAM role CloudFormation / setup guide | ✅ Done | `public/cloudformation/plaincost-readonly-role.yaml`, `/setup` |
+| 3.2 | Cross-account role assumption (STS) | ✅ Done | `lib/aws/sts.ts` |
+| 3.3 | Cost Explorer API integration | ✅ Done | Weekly spend, service breakdown, WoW delta |
+| 3.4 | Compute Optimizer integration | ✅ Done | Basic rightsizing recommendations |
+| 3.5 | Data models & storage for customer accounts | ✅ Done | `supabase/aws-connections.sql` |
+| 3.6 | Report generation engine | ✅ Done | `lib/reports/generate.ts`, snapshots in Supabase |
+| 3.7 | Plain-English narrative layer | 🔄 In progress | Template-based narratives; LLM optional later |
 
 ### Phase 4 — Product app (post-waitlist)
 
@@ -116,6 +116,14 @@ Tasks are ordered by dependency. Complete earlier phases before starting later o
 ## Session log
 
 Reverse-chronological notes. Add an entry at the end of each session.
+
+### 2026-07-08
+
+- Started Phase 3: CloudFormation template, STS assume-role, Cost Explorer, Compute Optimizer.
+- Added Supabase tables for `aws_account_connections` and `cost_report_snapshots`.
+- Added admin AWS dashboard at `/admin/aws` to create connections, validate roles, and preview reports.
+- Added customer setup guide at `/setup`.
+- **Next session:** Run `aws-connections.sql`, configure PlainCost AWS IAM user + env vars, test first real connection.
 
 ### 2026-07-07
 

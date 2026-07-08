@@ -51,3 +51,44 @@ Signups still save if email is not configured; confirmation email is sent when R
 2. Choose a strong `WAITLIST_ADMIN_SECRET` password.
 3. Add both to Vercel (mark `SUPABASE_SECRET_KEY` and `WAITLIST_ADMIN_SECRET` as **Sensitive**).
 4. Open `https://plaincost.ai/admin`, sign in, and use **Export CSV** as needed.
+
+## AWS connections (Phase 3)
+
+### Database
+
+Run `supabase/aws-connections.sql` in the Supabase SQL Editor.
+
+### PlainCost AWS credentials
+
+PlainCost needs an IAM user in **your** AWS account with permission to call `sts:AssumeRole` on customer roles.
+
+1. Create an IAM user (e.g. `plaincost-app`) with this policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "sts:AssumeRole",
+      "Resource": "arn:aws:iam::*:role/PlainCostReadOnly"
+    }
+  ]
+}
+```
+
+2. Add to Vercel (all **Sensitive** except the public account ID):
+
+- `PLAINCOST_AWS_ACCESS_KEY_ID`
+- `PLAINCOST_AWS_SECRET_ACCESS_KEY`
+- `PLAINCOST_AWS_ACCOUNT_ID`
+- `NEXT_PUBLIC_PLAINCOST_AWS_ACCOUNT_ID` (same 12-digit account ID, used in setup links)
+
+### Admin workflow
+
+1. Open `https://plaincost.ai/admin/aws`
+2. **Create connection** → copy the External ID (or send the CloudFormation link)
+3. Customer deploys `public/cloudformation/plaincost-readonly-role.yaml`
+4. Paste the Role ARN → **Validate connection** → **Generate report preview**
+
+Customer-facing setup guide: `https://plaincost.ai/setup`
